@@ -1,10 +1,12 @@
 package com.example.Intro_to_SQL_party2.service;
 
 import com.example.Intro_to_SQL_party2.model.Student;
+import com.example.Intro_to_SQL_party2.repository.StudentByCategory;
 import com.example.Intro_to_SQL_party2.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class StudentService {
@@ -52,5 +54,15 @@ public class StudentService {
         return studentRepository.findByAgeBetween(minAge, maxAge);
     }
 
+    public List<StudentByCategory> getStudentsCount() {
+        return studentRepository.getStudentsCount();
+    }
+    public double avgAgeByStudents() {
+        return studentRepository.avgAgeByStudents();
+    }
+
+    public List<StudentByCategory> getLastFiveStudent() {
+        return studentRepository.getLastFiveStudent();
+    }
 }
 

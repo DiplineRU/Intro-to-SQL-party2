@@ -1,8 +1,12 @@
 package com.example.Intro_to_SQL_party2.controller;
 
 import com.example.Intro_to_SQL_party2.model.Avatar;
+import com.example.Intro_to_SQL_party2.repository.AvatarRepository;
 import com.example.Intro_to_SQL_party2.service.AvatarService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,16 +23,19 @@ import java.nio.file.Path;
 public class AvatarController {
 
     private final AvatarService avatarService;
+    private final AvatarRepository avatarRepository;
 
     @Value("${avatar.cover.dir.path}") // Добавленная аннотация
     private String avatarDir; // Объявление переменной
 
 
-    public AvatarController(AvatarService avatarService) {
+    public AvatarController(AvatarService avatarService, AvatarRepository avatarRepository) {
         this.avatarService = avatarService;
+        this.avatarRepository = avatarRepository;
     }
 
-    @PostMapping(value = "/{studentId}/cover", consumes = MediaType.MULTIPART_FORM_DATA_VALUE) // Путь для добавления обложки к студенту
+    @PostMapping(value = "/{studentId}/cover", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    // Путь для добавления обложки к студенту
     public ResponseEntity<String> addCover(@PathVariable Long studentId, @RequestParam MultipartFile file) {
         try {
             avatarService.addCover(studentId, file); // Вызов метода добавления обложки
@@ -37,6 +44,7 @@ public class AvatarController {
             return ResponseEntity.status(500).body("Ошибка при добавлении обложки: " + e.getMessage());
         }
     }
+
     @GetMapping(value = "/{studentId}/cover")
     public ResponseEntity<byte[]> getCover(@PathVariable Long studentId) {
         try {
@@ -70,5 +78,12 @@ public class AvatarController {
         headers.setContentLength(avatar.getData().length);
 
         return ResponseEntity.status(HttpStatus.OK).headers(headers).body(avatar.getData());
+    }
+
+    @GetMapping
+    public Page<Avatar> getAvatars(@RequestParam(defaultValue = "0") int page,
+                                   @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return avatarRepository.findAll(pageable);
     }
 }
