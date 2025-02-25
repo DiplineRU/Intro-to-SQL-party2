@@ -1,7 +1,7 @@
 package com.example.Intro_to_SQL_party2;
 
-import com.example.Testing_Web_applications_in_Spring_Boot.controller.FacultyController;
-import com.example.Testing_Web_applications_in_Spring_Boot.model.Faculty;
+import com.example.Intro_to_SQL_party2.controller.FacultyController;
+import com.example.Intro_to_SQL_party2.model.Faculty;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

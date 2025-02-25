@@ -1,11 +1,11 @@
 package com.example.Intro_to_SQL_party2;
 
-import com.example.Testing_Web_applications_in_Spring_Boot.controller.StudentController;
-import com.example.Testing_Web_applications_in_Spring_Boot.model.Student;
-import com.example.Testing_Web_applications_in_Spring_Boot.repository.FacultyRepository;
-import com.example.Testing_Web_applications_in_Spring_Boot.repository.StudentRepository;
-import com.example.Testing_Web_applications_in_Spring_Boot.service.FacultService;
-import com.example.Testing_Web_applications_in_Spring_Boot.service.StudentService;
+import com.example.Intro_to_SQL_party2.controller.StudentController;
+import com.example.Intro_to_SQL_party2.model.Student;
+import com.example.Intro_to_SQL_party2.repository.FacultyRepository;
+import com.example.Intro_to_SQL_party2.repository.StudentRepository;
+import com.example.Intro_to_SQL_party2.service.FacultService;
+import com.example.Intro_to_SQL_party2.service.StudentService;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
